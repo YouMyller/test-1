@@ -5,7 +5,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Project
 
 Godot 4.7 project ("test-2") using the Forward Plus renderer (D3D12 on Windows) and Jolt Physics for 3D. It is a small 2D prototype:
-- `main.tscn` (the main scene): a screen-sized room (1152x648) with a `ColorRect` floor, four `StaticBody2D` walls just outside the edges, and a `Player` instance.
+- `main.tscn` (the main scene): a 2304x1296 room (2x2 screens) with a `ColorRect` floor, decorative `ColorRect` patches under `Decor`, four `StaticBody2D` walls just outside the edges, and a `Player` instance. The `Ground` node is in the `camera_bounds` group. If you resize the room, update the wall shapes/positions to match (camera limits follow automatically).
+- `player/player_camera.gd`: the Player's `Camera2D` (defined in `player.tscn`, with shared smoothing settings). On `_ready` it sets its limits from the first node in the `camera_bounds` group (a `Control`'s rect or a `TileMapLayer`'s used tiles). Every level must put one node in that group, or the camera has no limits and a warning is printed.
+- Physics interpolation is on, so `Camera2D` must use `process_callback = 0` (physics) or Godot warns and overrides it.
 - `player/player.tscn` + `player/player.gd`: a `CharacterBody2D` with four-directional movement (no diagonals). If several direction keys are held, the most recently pressed one wins. Held keys are tracked in `_held` and updated by polling in `_physics_process`.
 - Input actions `move_up`/`move_down`/`move_left`/`move_right` (WASD + arrow keys) are defined in `project.godot`.
 - `node_2d.tscn` is the unused original starter scene.

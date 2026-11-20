@@ -3,36 +3,78 @@
 [ext_resource type="PackedScene" path="res://player/player.tscn" id="1_player"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_horizontal"]
-size = Vector2(1152, 32)
+size = Vector2(2304, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vertical"]
-size = Vector2(32, 648)
+size = Vector2(32, 1296)
 
 [node name="Main" type="Node2D" unique_id=1411230305]
 
-[node name="Ground" type="ColorRect" parent="." unique_id=268169600]
-offset_right = 1152.0
-offset_bottom = 648.0
+[node name="Ground" type="ColorRect" parent="." unique_id=268169600 groups=["camera_bounds"]]
+offset_right = 2304.0
+offset_bottom = 1296.0
 mouse_filter = 2
 color = Color(0.2, 0.32, 0.22, 1)
+
+[node name="Decor" type="Node2D" parent="."]
+
+[node name="Patch1" type="ColorRect" parent="Decor"]
+offset_left = 160.0
+offset_top = 120.0
+offset_right = 420.0
+offset_bottom = 300.0
+mouse_filter = 2
+color = Color(0.16, 0.26, 0.18, 1)
+
+[node name="Patch2" type="ColorRect" parent="Decor"]
+offset_left = 1500.0
+offset_top = 200.0
+offset_right = 1700.0
+offset_bottom = 520.0
+mouse_filter = 2
+color = Color(0.16, 0.26, 0.18, 1)
+
+[node name="Patch3" type="ColorRect" parent="Decor"]
+offset_left = 1900.0
+offset_top = 900.0
+offset_right = 2200.0
+offset_bottom = 1100.0
+mouse_filter = 2
+color = Color(0.16, 0.26, 0.18, 1)
+
+[node name="Patch4" type="ColorRect" parent="Decor"]
+offset_left = 300.0
+offset_top = 950.0
+offset_right = 520.0
+offset_bottom = 1200.0
+mouse_filter = 2
+color = Color(0.16, 0.26, 0.18, 1)
+
+[node name="Path" type="ColorRect" parent="Decor"]
+offset_left = 700.0
+offset_top = 620.0
+offset_right = 1800.0
+offset_bottom = 676.0
+mouse_filter = 2
+color = Color(0.42, 0.36, 0.24, 1)
 
 [node name="Walls" type="StaticBody2D" parent="." unique_id=1931760985]
 
 [node name="Top" type="CollisionShape2D" parent="Walls" unique_id=1043240456]
-position = Vector2(576, -16)
+position = Vector2(1152, -16)
 shape = SubResource("RectangleShape2D_horizontal")
 
 [node name="Bottom" type="CollisionShape2D" parent="Walls" unique_id=1630170819]
-position = Vector2(576, 664)
+position = Vector2(1152, 1312)
 shape = SubResource("RectangleShape2D_horizontal")
 
 [node name="Left" type="CollisionShape2D" parent="Walls" unique_id=1088925521]
-position = Vector2(-16, 324)
+position = Vector2(-16, 648)
 shape = SubResource("RectangleShape2D_vertical")
 
 [node name="Right" type="CollisionShape2D" parent="Walls" unique_id=54377582]
-position = Vector2(1168, 324)
+position = Vector2(2320, 648)
 shape = SubResource("RectangleShape2D_vertical")
 
 [node name="Player" parent="." unique_id=699051901 instance=ExtResource("1_player")]
-position = Vector2(576, 324)
+position = Vector2(1152, 648)
