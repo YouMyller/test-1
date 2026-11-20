@@ -18,10 +18,10 @@ var _held: Array[StringName] = []
 
 func _physics_process(_delta: float) -> void:	#FixedUpdate
 	_update_held()
-	var dir: Vector2 = Vector2.ZERO
+	var direction: Vector2 = Vector2.ZERO
 	if not _held.is_empty():
-		dir = DIRECTIONS[_held.back()]
-	velocity = dir * speed
+		direction = DIRECTIONS[_held.back()]	#Returns the last item from the aarray
+	velocity = direction * speed
 	move_and_slide()
 
 
@@ -29,9 +29,9 @@ func _physics_process(_delta: float) -> void:	#FixedUpdate
 ## window loses focus) can't leave a direction stuck.
 func _update_held() -> void:
 	for action: StringName in DIRECTIONS:
-		if Input.is_action_pressed(action):
-			if Input.is_action_just_pressed(action) or action not in _held:
-				_held.erase(action)
-				_held.append(action)
+		if Input.is_action_pressed(action):		#True as long as any key is held
+			if Input.is_action_just_pressed(action) or action not in _held:		#True only in first physics step after key goes down, or a key held is not in list
+				_held.erase(action)		#Prevents duplicates in list
+				_held.append(action)	#Move held key to end of list -> newest
 		else:
 			_held.erase(action)
